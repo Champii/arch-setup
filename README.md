@@ -30,11 +30,13 @@ a fresh install.
 It will create a user (you have to actualy change the `USER` variable declaration at the top of the file  
 to choose your username), start a dhcpcd daemon and install the needed packages.
 
-`pacman -S base-devel lightdm lightdm-gtk-greeter zsh htop \
+```
+pacman -S base-devel lightdm lightdm-gtk-greeter zsh htop \
        i3 xorg-server xorg-xinit sudo xterm git \
        make gcc conky fakeroot alsa-utils feh \
        perl-anyevent-i3 chromium iotop jnettop \
-       go emacs screen glances libinput xbacklight`
+       go emacs screen glances libinput xbacklight
+```
        
 As it installs `go`, it adds a symbolic link to `/usr/local/go`
 
@@ -50,7 +52,6 @@ The second stage will just install the `yay` AUR wrapper and use it to install `
 ### Updating this repo
 
 A `update.sh` script is given to add back any modification of the dotfiles into the repo. 
-
 
 ## Usage
 
@@ -83,4 +84,5 @@ We also setup volume and brightness keys as well as the PrintScreen key
   - Icons for brightness and battery
   - Icons for wlan and eth
   - Sections for `sensors` (fan speed, cpu temp, ...)
+  - Different colors for battery section and notifications
   
