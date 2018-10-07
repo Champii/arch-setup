@@ -20,7 +20,12 @@ plugins=(git extract cp nvm)
 source $ZSH/oh-my-zsh.sh
 
 # Aliases
+
+# Misc
 alias am="alsamixer"
+alias src="source ~/.zshrc"
+
+# Yay
 alias yi="yay -S"
 alias yu="yay -Syu"
 alias ys="yay -Ss"
@@ -36,7 +41,10 @@ alias gc="git commit -m"
 alias gca="git commit -am"
 alias ga="git commit --amend"
 alias gaa="git commit -a --amend"
+alias gs="git status"
 alias clone="git clone"
+alias pull="git pull origin `git rev-parse --abbrev-ref HEAD`"
+alias push="git push origin `git rev-parse --abbrev-ref HEAD`"
 
 # Screen
 alias sdet="screen -d -m -S"

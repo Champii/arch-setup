@@ -19,11 +19,11 @@ dhcpcd
 sleep 5
 
 # Install dependancies
-pacman -S lightdm lightdm-gtk-greeter zsh htop \
+pacman -S base-devel lightdm lightdm-gtk-greeter zsh htop \
        i3 xorg-server xorg-xinit sudo xterm git \
        make gcc conky fakeroot alsa-utils feh \
        perl-anyevent-i3 chromium iotop jnettop \
-       go emacs screen glances libinput
+       go emacs screen glances libinput xbacklight
 
 # Fix the go root directory
 sudo ln -s /usr/lib/go /usr/local/go

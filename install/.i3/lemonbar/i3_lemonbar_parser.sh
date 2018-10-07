@@ -31,13 +31,13 @@ while read -r line ; do
       else
         cpu_cback=${color_sec_b2}; cpu_cicon=${color_icon}; cpu_cfore=${color_fore};
       fi
-      cpu="%{F${cpu_cback}}${sep_left}%{F${cpu_cicon} B${cpu_cback}} %{T2}${icon_cpu}%{F${cpu_cfore} T1} ${sys_arr[4]}%%"
+      cpu="%{F${cpu_cback}}${sep_left}%{F${cpu_cicon} B${cpu_cback}} %{T2}${icon_cpu}%{F${cpu_cfore} T1} ${sys_arr[4]}%"
       # mem
       mem="%{F${cpu_cicon}}${sep_l_left} %{T2}${icon_mem}%{F${cpu_cfore} T1} ${sys_arr[5]}"
       # disk /
-      diskr="%{F${color_sec_b1}}${sep_left}%{F${color_icon} B${color_sec_b1}} %{T2}${icon_hd}%{F- T1} ${sys_arr[6]}%%"
+      diskr="%{F${color_sec_b1}}${sep_left}%{F${color_icon} B${color_sec_b1}} %{T2}${icon_hd}%{F- T1} ${sys_arr[6]}%"
       # disk home
-      diskh="%{F${color_icon}}${sep_l_left} %{T2}${icon_home}%{F- T1} ${sys_arr[7]}%%"
+      diskh="%{F${color_icon}}${sep_l_left} %{T2}${icon_home}%{F- T1} ${sys_arr[7]}%"
       # wlan
       if [ "${sys_arr[8]}" == "down" ]; then
         wland_v="×";
@@ -65,7 +65,7 @@ while read -r line ; do
         if [ ${ethd_v:0:-3} -gt ${net_alert} ] || [ ${ethu_v:0:-3} -gt ${net_alert} ]; then
           eth_cback=${color_net}; eth_cicon=${color_back}; eth_cfore=${color_back};
         else
-          eth_cback=${color_sec_b1}; eth_cicon=${color_icon}; eth_cfore=${color_back};
+          eth_cback=${color_sec_b1}; eth_cicon=${color_icon}; eth_cfore=${color_fore};
         fi
       fi
       ethd="%{F${eth_cback}}${sep_left}%{F${eth_cicon} B${eth_cback}} %{T2}${icon_dl}%{F${eth_cfore} T1} ${ethd_v}${stab}"
@@ -74,11 +74,17 @@ while read -r line ; do
           ethd="%{F${color_red}}${sep_left}%{F${color_icon} B${color_red}} %{T1}${ethd_v} "
           ethu=""
       fi
+
+      batperc="%{F${color_head}}${sep_left}%{F${color_head} B${color_head}}%{F${color_back} T1}  ${sys_arr[12]}"
       ;;
     VOL*)
-      # Volume
-      vol="%{F${color_sec_b2}}${sep_left}%{F${color_icon} B${color_sec_b2}} %{T2}${icon_vol}%{F- T1} ${line#???}"
-      ;;
+        # Volume
+        vol="%{F${color_sec_b2}}${sep_left}%{F${color_icon} B${color_sec_b2}} %{T2}${icon_vol}%{F- T1} ${line#???}"
+        ;;
+    BRI*)
+        # Brightness
+        bri="%{F${color_fore}}${sep_l_left}%{F${color_icon} B${color_sec_b2}}%{F${color_fore} T1} ${line#???}%"
+        ;;
     GMA*)
       # Gmail
       gmail="${line#???}"
@@ -137,6 +143,6 @@ while read -r line ; do
   esac
 
   # And finally, output
-  printf "%s\n" "%{l}${wsp}${title} %{r}${mpd}${stab}${irc}${stab}${gmail}${stab}${cpu}${stab}${mem}${stab}${diskr}${stab}${diskh}${stab}${wland}${wlanu}${ethd}${ethu}${vol}${stab}${date}${stab}${time}"
+  printf "%s\n" "%{l}${wsp}${title} %{r}${stab}${irc}${stab}${gmail}${stab}${cpu}${stab}${mem}${stab}${diskr}${stab}${diskh}${stab}${wland}${wlanu}${ethd}${ethu}${vol}${stab}${bri}${stab}${batperc}${stab}${date}${stab}${time}"
   #printf "%s\n" "%{l}${wsp}${title}"
 done

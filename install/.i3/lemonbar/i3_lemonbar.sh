@@ -32,6 +32,7 @@ conky -c $(dirname $0)/i3_lemonbar_conky > "${panel_fifo}" &
 
 ### UPDATE INTERVAL METERS
 cnt_vol=${upd_vol}
+cnt_bri=${upd_vol}
 cnt_mail=${upd_mail}
 cnt_mpd=${upd_mpd}
 
@@ -39,7 +40,7 @@ while :; do
 
   # Volume, "VOL"
   if [ $((cnt_vol++)) -ge ${upd_vol} ]; then
-    amixer get Master | grep "${snd_cha}" | awk -F'[]%[]' '/%/ {if ($7 == "off") {print "VOL×\n"} else {printf "VOL%d%%%%\n", $2}}' > "${panel_fifo}" &
+    amixer get Master | grep "${snd_cha}" | awk -F'[]%[]' '/%/ {if ($7 == "off") {print "VOL×\n"} else {printf "VOL%d%%\n", $2}}' > "${panel_fifo}" &
     cnt_vol=0
   fi
 
@@ -51,9 +52,15 @@ while :; do
 
   # MPD
   if [ $((cnt_mpd++)) -ge ${upd_mpd} ]; then
-    #printf "%s%s\n" "MPD" "$(ncmpcpp --now-playing '{%a - %t}|{%f}' | head -c 60)" > "${panel_fifo}"
-    printf "%s%s\n" "MPD" "$(mpc current -f '[[%artist% - ]%title%]|[%file%]' 2>&1 | head -c 70)" > "${panel_fifo}"
-    cnt_mpd=0
+      #printf "%s%s\n" "MPD" "$(ncmpcpp --now-playing '{%a - %t}|{%f}' | head -c 60)" > "${panel_fifo}"
+      printf "%s%s\n" "MPD" "$(mpc current -f '[[%artist% - ]%title%]|[%file%]' 2>&1 | head -c 70)" > "${panel_fifo}"
+      cnt_mpd=0
+  fi
+
+  # brightness
+  if [ $((cnt_bri++)) -ge ${upd_vol} ]; then
+      printf "%s%s\n" "BRI" "$(xbacklight | cut -d '.' -f 1)" > "${panel_fifo}"
+      cnt_bri=0
   fi
 
   # Finally, wait 1 second

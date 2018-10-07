@@ -77,10 +77,16 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
+# split in horizontal orientation and spawn a term
+bindsym $mod+x split h, exec xterm -rv
+
+# split in vertical orientation and spawn a term
+bindsym $mod+z split v, exec xterm -rv
+
+# change split in horizontal orientation
 bindsym $mod+h split h
 
-# split in vertical orientation
+# change split in vertical orientation
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
@@ -127,6 +133,10 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+workspace 1:</> output eDP1
+workspace 2:>_  output DP2
+workspace 3:www output HDMI1
+
 # Force chromium on workspace 3 and vlc on 4
 assign [class="Chromium"] 3:www
 assign [class="vlc"] 4
@@ -138,7 +148,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'pkill lemonbar; i3-msg exit'"
 
 # Live resize
 bindsym $mod+Mod1+Left resize shrink width 1 px or 1 ppt
@@ -178,12 +188,12 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # Brightness keys
-bindsym XF86MonBrightnessUp exec ~/.bin/cbacklight --inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec ~/.bin/cbacklight --dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 # Brightness Min and Max
-bindsym Shift+XF86MonBrightnessUp exec ~/.bin/cbacklight --set 100 # increase screen brightness
-bindsym Shift+XF86MonBrightnessDown exec ~/.bin/cbacklight --set 1 # decrease screen brightness
+bindsym Shift+XF86MonBrightnessUp exec xbacklight -set 100 # increase screen brightness
+bindsym Shift+XF86MonBrightnessDown exec xbacklight -set 1 # decrease screen brightness
 
 # Run chromium on startup
 exec chromium
@@ -200,8 +210,8 @@ smart_gaps on
 smart_borders on
 
 # Set inner/outer gaps
-gaps inner 8
-gaps outer -2
+gaps inner 14
+gaps outer 0
 
 # Gaps mode
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -251,8 +261,16 @@ exec libinput-gestures
 exec albert
 
 # Autolock
-exec --no-startup-id xautolock -detectsleep -time 3 -locker "i3lock-fancy" \
+exec --no-startup-id xautolock -detectsleep -secure -time 30 -locker "i3lock-fancy" \
     -notify 20 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 20 seconds'"
 
 # Emacs bindings
 bindsym $mod+n exec emacsclient -create-frame -a ""
+
+exec xrandr --output DP2 --auto --right-of eDP1
+exec xrandr --output HDMI1 --auto --right-of DP2 --rotate left
+
+exec emacs -daemon
+
+# Screenshot
+bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/pictures/'

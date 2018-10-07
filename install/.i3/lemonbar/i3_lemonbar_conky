@@ -18,5 +18,6 @@ ${fs_used_perc /} \
 ${fs_used_perc /home} \
 ${if_up wlp2s0}${downspeedf wlp2s0} ${upspeedf wlp2s0} \
 ${else}down down${endif} \
-${if_up eth0}${downspeedf eth0} ${upspeedf eth0} \
-${else}down down${endif}\
+${if_up enp62s0u1u4}${downspeedf enp62s0u1u4} ${upspeedf enp62s0u1u4} \
+${else}down down${endif} \
+${battery_percent BAT0}%
