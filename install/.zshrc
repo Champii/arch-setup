@@ -1,6 +1,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+export EDITOR=nano
+
 # Go Path
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/go
@@ -45,6 +47,7 @@ alias gs="git status"
 alias clone="git clone"
 alias pull="git pull origin `git rev-parse --abbrev-ref HEAD`"
 alias push="git push origin `git rev-parse --abbrev-ref HEAD`"
+alias pushf="git push -f origin `git rev-parse --abbrev-ref HEAD`"
 
 # Screen
 alias sdet="screen -d -m -S"
@@ -62,3 +65,7 @@ alias glances="glances --fs-free-space -1 --enable-process-extended --process-sh
 xset fp+ $HOME/.fonts/misc
 xset fp+ $HOME/.fonts/ohsnap
 xset fp+ $HOME/.fonts/terminesspowerline
+source /usr/share/nvm/init-nvm.sh
+
+export LLVMENV_RUST_BINDING=1
+source <(llvmenv zsh)

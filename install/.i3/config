@@ -137,10 +137,6 @@ workspace 1:</> output eDP1
 workspace 2:>_  output DP2
 workspace 3:www output HDMI1
 
-# Force chromium on workspace 3 and vlc on 4
-assign [class="Chromium"] 3:www
-assign [class="vlc"] 4
-
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
@@ -194,9 +190,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightne
 # Brightness Min and Max
 bindsym Shift+XF86MonBrightnessUp exec xbacklight -set 100 # increase screen brightness
 bindsym Shift+XF86MonBrightnessDown exec xbacklight -set 1 # decrease screen brightness
-
-# Run chromium on startup
-exec chromium
 
 ### i3-gaps stuff ###
 
@@ -267,8 +260,8 @@ exec --no-startup-id xautolock -detectsleep -secure -time 30 -locker "i3lock-fan
 # Emacs bindings
 bindsym $mod+n exec emacsclient -create-frame -a ""
 
-exec xrandr --output DP2 --auto --right-of eDP1
-exec xrandr --output HDMI1 --auto --right-of DP2 --rotate left
+exec xrandr --output HDMI-1 --auto --right-of eDP-1
+exec xrandr --output DP-2 --auto --right-of DP-2 
 
 exec emacs -daemon
 
