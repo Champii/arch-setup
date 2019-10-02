@@ -23,9 +23,24 @@ source $ZSH/oh-my-zsh.sh
 
 # Aliases
 
+# Exa
+alias ls="exa --git"
+alias l="ls -l"
+alias la="l -a"
+alias lt="l --tree"
+alias lta="la --tree"
+alias lg="l --grid"
+alias lga="la --grid"
+
 # Misc
 alias am="alsamixer"
 alias src="source ~/.zshrc"
+alias please="sudo"
+
+alias ps="procs"
+alias cat="bat --theme GitHub"
+alias find="fd"
+alias howdoi="hors -c"
 
 # Yay
 alias yi="yay -S"
@@ -34,6 +49,8 @@ alias ys="yay -Ss"
 alias yr="yay -Rsc"
 
 # Ping
+alias ping="cping"
+alias p="ping"
 alias pg="ping google.fr"
 alias p8="ping 8.8.8.8"
 
@@ -69,3 +86,6 @@ source /usr/share/nvm/init-nvm.sh
 
 export LLVMENV_RUST_BINDING=1
 source <(llvmenv zsh)
+
+# opam configuration
+test -r /home/champii/.opam/opam-init/init.zsh && . /home/champii/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
