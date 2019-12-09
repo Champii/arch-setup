@@ -89,3 +89,5 @@ source <(llvmenv zsh)
 
 # opam configuration
 test -r /home/champii/.opam/opam-init/init.zsh && . /home/champii/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export PATH=/home/champii/.local/bin:$PATH

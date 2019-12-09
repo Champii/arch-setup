@@ -23,7 +23,7 @@ font pango:DejaVu Sans Mono, FontAwesome 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xterm -rv
+bindsym $mod+Return exec konsole
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -78,10 +78,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation and spawn a term
-bindsym $mod+x split h, exec xterm -rv
+bindsym $mod+x split h, exec konsole
 
 # split in vertical orientation and spawn a term
-bindsym $mod+z split v, exec xterm -rv
+bindsym $mod+z split v, exec konsole
 
 # change split in horizontal orientation
 bindsym $mod+h split h
